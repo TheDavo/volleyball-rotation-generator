@@ -16,6 +16,7 @@ public:
     // Getters
     std::vector<Player> get_team();
     Player get_player(int i);
+	void show_team();
     
     // Setters
     void add_team_member(Player player);

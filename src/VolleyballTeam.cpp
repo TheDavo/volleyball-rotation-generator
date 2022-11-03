@@ -1,6 +1,7 @@
 // Standard includes
 #include <string>
 #include <vector>
+#include <iostream>
 
 // Custom includes
 #include "../include/VolleyballTeam.h"
@@ -25,6 +26,12 @@ std::vector<Player> VolleyballTeam::get_team() {
 
 Player VolleyballTeam::get_player(int i) {
     return team.at(i);
+}
+
+void VolleyballTeam::show_team() {
+	for (Player player : team) {
+		std::cout << player.get_name() << std::endl;
+	}
 }
 
 // Setters
