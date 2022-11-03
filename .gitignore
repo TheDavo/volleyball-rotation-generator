@@ -1,3 +1,15 @@
 # Gitignore for my Volleyball Rotation Generator Project
 
 *.out
+
+
+# CodeLite Editor Ignore
+#
+Debug
+*.exe
+*.txt
+*.mk
+*.workspace
+*.ctagsd
+*.codelite
+*.project
