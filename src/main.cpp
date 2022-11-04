@@ -32,16 +32,22 @@ int main() {
     vector<Position> jose_pref {Position::Setter,Position::Outside};
     Player jose {"Jose", jose_pref};
 
-	VolleyballTeam my_team {};
-	my_team.add_team_member(davit);
-	my_team.add_team_member(selma);
-	my_team.add_team_member(thinh);
-	my_team.add_team_member(dan);
-	my_team.add_team_member(lauren);
-	my_team.add_team_member(scott);
-	my_team.add_team_member(jose);
+
+	std::vector<Player> my_team {};
+
+	my_team.push_back(davit);
+	my_team.push_back(selma);
+	my_team.push_back(thinh);
+	my_team.push_back(dan);
+	my_team.push_back(lauren);
+	my_team.push_back(scott);
+	my_team.push_back(jose);
+	
+	VolleyballTeam team {my_team};
 	
 
-    my_team.show_team();
+    team.show_team();
+	cout << endl;
+	team.show_team_by_position();
     return 0;
 }

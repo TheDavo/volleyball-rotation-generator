@@ -17,7 +17,10 @@ std::string Player::get_name() {
 
 std::vector<Position> Player::get_positions() {
     return positions;
+}
 
+void Player::show_positions() {
+	// TODO
 }
 
 // Setters

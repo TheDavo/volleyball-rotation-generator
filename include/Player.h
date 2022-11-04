@@ -16,6 +16,7 @@ public:
     // Getters
     std::string get_name();
     std::vector<Position> get_positions();
+	void show_positions();
 
 
     // Setters
