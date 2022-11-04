@@ -12,12 +12,12 @@
 
 // Constructors
 VolleyballTeam::VolleyballTeam() {
-    std::vector<Player> team {};
+	std::vector<Player> team {};
 	std::map<Position, std::vector<Player>> team_by_position {};
 }
 
 VolleyballTeam::VolleyballTeam(std::vector<Player> new_team)
-    : team{new_team} {
+	: team{new_team} {
 	VolleyballTeam::transpose_team();
 }
 
@@ -67,11 +67,11 @@ std::string VolleyballTeam::position_as_str(Position p){
 
 // Getters
 std::vector<Player> VolleyballTeam::get_team() {
-    return team;
+	return team;
 }
 
 Player VolleyballTeam::get_player(int i) {
-    return team.at(i);
+	return team.at(i);
 }
 
 void VolleyballTeam::show_team() {
@@ -96,15 +96,14 @@ void VolleyballTeam::add_team_member(Player player) {
 }
 
 void VolleyballTeam::remove_team_member(Player player) {
-    
-    for (size_t i = 0; i < team.size(); i++ ) {
-        if (team.at(i).get_name() == player.get_name()) {
-            team.erase(team.begin() + i);
-            return;
-        }
-    }
+	for (size_t i = 0; i < team.size(); i++ ) {
+		if (team.at(i).get_name() == player.get_name()) {
+			team.erase(team.begin() + i);
+			return;
+		}
+	}
 }
 
 void VolleyballTeam::remove_team_member(int i) {
-    team.erase(team.begin() + i);
+	team.erase(team.begin() + i);
 }
