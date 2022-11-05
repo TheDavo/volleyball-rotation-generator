@@ -11,7 +11,7 @@ using namespace std;
 
 
 int main() {
-    vector<Position> davit_pref {Position::Outside, Position::Middle,Position::Setter};
+    vector<Position> davit_pref {Position::Outside, Position::Middle, Position::Setter};
     Player davit {"Davit", davit_pref};
 	
     vector<Position> selma_pref {Position::Setter,Position::Libero};
@@ -49,5 +49,11 @@ int main() {
     team.show_team();
 	cout << endl;
 	team.show_team_by_position();
+	cout << endl;
+	cout << "Can team run a 5-1? " << team.can_run_team(team.team_5_1) << endl;
+	
+	cout << "Can team run a 6-2? " << team.can_run_team(team.team_6_2) << endl;
+	
+	team.possible_teams(team.team_5_1);
     return 0;
 }
