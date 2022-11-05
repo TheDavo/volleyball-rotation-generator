@@ -9,13 +9,15 @@
 
 class Player {
 private: 
-    std::string full_name;
-    std::vector<Position> positions;
+	std::string full_name;
+	std::vector<Position> positions;
+	
+	std::string position_as_str(Position p);
 
 public:
-    // Getters
-    std::string get_name();
-    std::vector<Position> get_positions();
+	// Getters
+	std::string get_name();
+	std::vector<Position> get_positions();
 	void show_positions();
 
 
@@ -27,6 +29,11 @@ public:
 
     // Constructors
     Player(std::string name, std::vector<Position> positions);
+	
+	// Operators
+	bool operator ==(Player p) {
+		return full_name == p.get_name();
+	}
 };
 
 #endif

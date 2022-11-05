@@ -15,6 +15,32 @@ std::string Player::get_name() {
     return full_name;
 }
 
+std::string Player::position_as_str(Position p){
+	std::string position = "";
+	switch (p) {
+		case Position::Setter:
+			position = "Setter";
+			break;
+		case Position::Libero:
+			position = "Libero";
+			break;
+		case Position::Middle:
+			position = "Middle";
+			break;
+		case Position::Outside:
+			position = "Outside";
+			break;
+		case Position::Opposite:
+			position = "Opposite";
+			break;
+		default:
+			position = "";
+			break;
+	}
+	return position;
+}
+
+
 std::vector<Position> Player::get_positions() {
     return positions;
 }
