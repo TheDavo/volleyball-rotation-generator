@@ -3,7 +3,7 @@
 #include <vector>
 #include <map>
 #include <iostream>
-
+#include <algorithm> // for std::find
 // Custom includes
 #include "../include/VolleyballTeam.h"
 #include "../include/Player.h"
@@ -26,16 +26,7 @@ VolleyballTeam::VolleyballTeam(std::vector<Player> new_team)
 void VolleyballTeam::transpose_team() {
 	for(auto & player: team) {
 		for(auto pos : player.get_positions()){
-			// Check if the key exists
-			// If it does, simply add player to the existing vector
-			// Otherwise insert new player vector into the map at new position
-			if(team_by_position.count(pos)){
-				team_by_position[pos].push_back(player);
-			} else {
-				std::vector<Player> temp {};
-				temp.push_back(player);
-				team_by_position.insert({pos, temp});
-			}
+			team_by_position[pos].push_back(player);
 		}
 	}
 }
@@ -80,6 +71,18 @@ void VolleyballTeam::show_team() {
 	}
 }
 
+std::map<Position, std::vector<Player>> VolleyballTeam::create_empty_team(){
+	std::map<Position, std::vector<Player>> new_team{
+		{Position::Setter, std::vector<Player>{}},
+		{Position::Middle, std::vector<Player>{}},
+		{Position::Outside, std::vector<Player>{}},
+		{Position::Opposite, std::vector<Player>{}},
+		{Position::Libero, std::vector<Player>{}},
+	};
+	
+	return new_team;
+}
+
 void VolleyballTeam::show_team_by_position() {
 	for (auto const& [pos, players] : team_by_position) {
 		std::cout << "Position: " << position_as_str(pos) << " is preferred by: " << std::endl;
@@ -87,6 +90,45 @@ void VolleyballTeam::show_team_by_position() {
 			std::cout << "\t" << player.get_name() << std::endl;
 		}
 	}
+}
+
+std::vector<std::map<Position, std::vector<Player>>> VolleyballTeam::possible_teams(std::map<Position, int> team_style){
+	std::vector<std::map<Position, std::vector<Player>>> possible_teams {};
+	
+	std::map<Position, std::vector<Player>> cur_team = create_empty_team();
+	std::vector<Player> unavailable_players {};
+	
+	for (auto const& [pos, amount] : team_style) {
+		std::cout << "Looking for " << position_as_str(pos) << std::endl;
+		for(int i = 0; i < amount; i++) {
+			for(auto & player : team){
+				std::vector<Position> player_pos = player.get_positions();
+				// Ensure there is a free player available and can fit the position
+				if (std::find(unavailable_players.begin(), unavailable_players.end(), player) == unavailable_players.end() && 
+					std::find(player_pos.begin(), player_pos.end(), pos) != player_pos.end()){
+					std::cout << "Player \t" << player.get_name() << std::endl;
+					// Add player for the current position
+					std::cout << "Player\t" << player.get_name() << " is a fit for " << position_as_str(pos) << std::endl;
+					cur_team[pos].push_back(player);
+					
+					// Add to list of chosen players
+					unavailable_players.push_back(player);
+					
+					// Found a player, break out of loop
+					break;
+				}
+			}
+		}
+	}
+	
+	if (unavailable_players.size() != team.size()) {
+		// TODO
+		// Implement check of current team vs team (if the team can be made)
+		// If not, attempt to find players to swap places to fill in the blanks
+	}
+	
+	possible_teams.push_back(cur_team);
+	return possible_teams;
 }
 
 // Setters
@@ -106,4 +148,22 @@ void VolleyballTeam::remove_team_member(Player player) {
 
 void VolleyballTeam::remove_team_member(int i) {
 	team.erase(team.begin() + i);
+}
+
+
+// Volleyball Functions
+
+bool VolleyballTeam::can_run_team(std::map<Position, int> team_style){
+	for (auto requirement : team_style) {
+		// Typecasting here as the type of .size() was long long unsigned int
+		// Resulting in compiler warnings
+		if(int(team_by_position[requirement.first].size()) < requirement.second){
+			return false;
+		}
+	}
+	return true;
+}
+
+void VolleyballTeam::attempt_find_swap() {
+	
 }
