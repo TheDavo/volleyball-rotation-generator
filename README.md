@@ -25,7 +25,10 @@ The tool will generate and display all potential rotations, factoring in volleyb
 
 When there is an overflow of players with particular preference (for example, multiple players want to play Outside and do not have second preferences) the remaining players will be randomly selected to fill in any missing gaps.
 
+## Outcome 
+The tool currently goes through all the permutations of player positions, and cycles through a user inputted team style (think 5-1, 6-2), and checks if each permutation of the player positions will fit for the team style.
 
+If the current selection of players fits the team, that team is added to a vector of Teams which can then later be printed.
 
 ## Future Goals
 [] Expand on the Player class to add weighting to preferences, such that two Players with the same preferences will now have weights to their preferences, nudging them to their most preferred role.
