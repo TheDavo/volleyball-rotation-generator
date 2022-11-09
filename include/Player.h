@@ -11,7 +11,6 @@ class Player {
 private: 
 	std::string full_name;
 	std::vector<Position> positions;
-	
 	std::string position_as_str(Position p);
 
 public:

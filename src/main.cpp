@@ -67,7 +67,6 @@ int main() {
 	};
     team.show_team();
 	cout << endl;
-	team.show_team_by_position();
 	
 	vector<Team> rotations = possible_teams(team, team_5_1);
 	cout << "Possible teams: " << rotations.size() << endl;
