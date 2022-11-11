@@ -29,5 +29,6 @@ public:
 
     // Constructors
     Team(std::vector<Player> team);
+	Team();
 };
 #endif

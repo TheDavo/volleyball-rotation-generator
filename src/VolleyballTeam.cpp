@@ -15,6 +15,10 @@ Team::Team(std::vector<Player> new_team)
 	: team{new_team} {
 }
 
+Team::Team()
+	: team{}{
+}
+
 
 // Getters
 std::vector<Player> Team::get_team() {
