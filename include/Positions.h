@@ -12,4 +12,6 @@ enum class Position {
     Opposite
 };
 
+std::string position_as_str(Position p);
+
 #endif

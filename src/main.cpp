@@ -7,6 +7,7 @@
 #include "../include/Player.h"
 #include "../include/Positions.h"
 #include "../include/VolleyballTeam.h"
+#include "../include/MenuDriver.h"
 // Namespaces
 using namespace std;
 
@@ -69,13 +70,8 @@ int main() {
 	cout << endl;
 	
 	vector<Team> rotations = possible_teams(team, team_5_1);
-	cout << "Possible teams: " << rotations.size() << endl;
-	
-	for (Team team : rotations) {
-		cout << "++++++++++++++++++++++" << endl;
-		team.show_team();
-		cout << "----------------------" << endl;
-	}
+	MenuDriver menu {my_team, rotations, team_5_1};
+	menu.run();
     return 0;
 }
 
@@ -85,31 +81,6 @@ void print_perm(vector<int> perm) {
 		cout << i;
 	}
 	cout << endl;
-}
-
-string position_as_str(Position p){
-	std::string position = "";
-	switch (p) {
-		case Position::Setter:
-			position = "Setter";
-			break;
-		case Position::Libero:
-			position = "Libero";
-			break;
-		case Position::Middle:
-			position = "Middle";
-			break;
-		case Position::Outside:
-			position = "Outside";
-			break;
-		case Position::Opposite:
-			position = "Opposite";
-			break;
-		default:
-			position = "";
-			break;
-	}
-	return position;
 }
 
 int f()
@@ -122,7 +93,14 @@ vector<Team> possible_teams(Team team, map<int, Position> team_style) {
 	Team new_team = Team();
 	vector<Team> ret {};
 	vector<int> ordered_positions(team.get_team().size());
+	
+	// Simply generates a range of the size of the team
 	generate(ordered_positions.begin(), ordered_positions.end(), f);
+	
+	// Early exit if team size is smaller than the required number of positions
+	if (team.get_team().size() < team_style.size()){
+		return {};
+	}
 	
 	do {
 		for(size_t i = 1; i <= team_style.size(); i++){
