@@ -66,10 +66,9 @@ int main() {
 		{5, Position::Outside},
 		{6, Position::Middle},
 	};
-    team.show_team();
-	cout << endl;
 	
 	vector<Team> rotations = possible_teams(team, team_5_1);
+
 	MenuDriver menu {my_team, rotations, team_5_1};
 	menu.run();
     return 0;
