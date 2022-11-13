@@ -10,25 +10,25 @@
 #include "./Player.h"
 
 class Team {
-private:
+	private:
 
-    std::vector<Player> team;
-	
-public:
+		std::vector<Player> team;
 
-    // Getters
-    std::vector<Player> get_team();
-    Player get_player(int i);
-	void show_team();
-    
-    // Setters
-    void add_team_member(Player player);
-    void remove_team_member(Player player);
-    void remove_team_member(int i);
-	void empty_team();
+	public:
 
-    // Constructors
-    Team(std::vector<Player> team);
-	Team();
+		// Getters
+		std::vector<Player> get_team();
+		Player get_player(int i);
+		void show_team();
+
+		// Setters
+		void add_team_member(Player player);
+		void remove_team_member(Player player);
+		void remove_team_member(int i);
+		void empty_team();
+
+		// Constructors
+		Team(std::vector<Player> team);
+		Team();
 };
 #endif

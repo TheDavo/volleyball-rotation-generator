@@ -16,7 +16,7 @@ Team::Team(std::vector<Player> new_team)
 }
 
 Team::Team()
-	: team{}{
+	: team{} {
 }
 
 
@@ -32,7 +32,7 @@ Player Team::get_player(int i) {
 void Team::show_team() {
 	for (Player player : team) {
 		std::cout << player.get_name() << ": ";
-		for (Position pos : player.get_positions()){
+		for (Position pos : player.get_positions()) {
 			std::cout << position_as_str(pos) << " ";
 		}
 		std::cout << std::endl;
@@ -41,7 +41,7 @@ void Team::show_team() {
 // Setters
 
 void Team::add_team_member(Player player) {
-    team.push_back(player);
+	team.push_back(player);
 }
 
 void Team::remove_team_member(Player player) {

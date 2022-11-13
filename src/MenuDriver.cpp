@@ -9,8 +9,8 @@
 
 
 MenuDriver::MenuDriver(Team team, std::vector<Team> rotations, std::map<int, Position> team_style)
-	: team{team}, rotations{rotations}, team_style{team_style}{
-	
+	: team{team}, rotations{rotations}, team_style{team_style} {
+
 }
 
 void MenuDriver::run() {
@@ -28,14 +28,14 @@ void MenuDriver::print_intro() {
 
 void MenuDriver::print_overview() {
 	std::cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=- Team Overview =-=-=-=-=-=-=-=-=-=-=-=-=-=- " << std::endl;
-	
+
 	std::cout << "The volleyball team is currently composed of these players and their preferences: " << std::endl;
 
 	team.show_team();
 }
 
-void MenuDriver::print_rotations_intro(){
-	
+void MenuDriver::print_rotations_intro() {
+
 	std::cout << "=-=-=-=-=-=-=-=-=-=-=-=-=- Team Rotations =-=-=-=-=-=-=-=-=-=-=-=-=- " << std::endl;
 	std::cout << "|\tThe team provided is capable of running " << rotations.size() << " rotations" << std::endl;
 	std::cout << "|\twith the team composition of:" << std::endl;
@@ -44,7 +44,7 @@ void MenuDriver::print_rotations_intro(){
 	}
 }
 
-bool MenuDriver::is_valid_input(char input){
+bool MenuDriver::is_valid_input(char input) {
 	std::vector<char> inputs = valid_inputs[cur_state];
 	return std::count(inputs.begin(), inputs.end(), input);
 }
@@ -85,7 +85,7 @@ void MenuDriver::handle_input_Intro(char input) {
 			cur_state = State::Exit;
 			return;
 	}
-	
+
 	print_menu();
 	handle_input();
 }
@@ -127,7 +127,7 @@ void MenuDriver::change_pagination_size() {
 	if (pagination_size > rotations.size()) {
 		pagination_size = rotations.size();
 	} else if (pagination_size <= 0 ) {
-		pagination_size = 1; 
+		pagination_size = 1;
 	}
 }
 
@@ -145,7 +145,7 @@ void MenuDriver::handle_input() {
 	while(cur_state != State::Exit) {
 		std::cout << "Please enter an action: ";
 		std::cin >> input;
-		if(is_valid_input(input)){
+		if(is_valid_input(input)) {
 			perform_input_action(input);
 		} else {
 			std::cout << "Invalid input! \n" << std::endl;
@@ -158,9 +158,9 @@ void MenuDriver::print_rotations(bool direction) {
 	// true -> next, false -> prev
 	static bool first_call {true};
 	size_t to {};
-	if(!first_call){
+	if(!first_call) {
 		if (direction) { // next rotations
-			if(pagination_size >= rotations.size()){
+			if(pagination_size >= rotations.size()) {
 				// Since the pagination size is greater than the entire vector
 				// set the starting point to zero, showing the entire vector
 				start_rotation_display = 0;
@@ -178,12 +178,12 @@ void MenuDriver::print_rotations(bool direction) {
 		}
 	}
 	first_call = false;
-	
+
 	to = start_rotation_display + pagination_size;
-	if (to >= rotations.size()){
+	if (to >= rotations.size()) {
 		to = rotations.size();
 	}
-	for(size_t i = start_rotation_display; i < to; i++){
+	for(size_t i = start_rotation_display; i < to; i++) {
 		std::cout << "--------- Rotation # " << i + 1 << " of " << rotations.size() << std::endl;
 		rotations.at(i).show_team();
 		std::cout << "-----------------------------------" << std::endl;
@@ -192,7 +192,7 @@ void MenuDriver::print_rotations(bool direction) {
 
 void MenuDriver::print_all_rotations() {
 	std::cout << "=-=-=-=-=-=-=-=-=-=-=-=-=- Team Rotations =-=-=-=-=-=-=-=-=-=-=-=-=- " << std::endl;
-	
+
 	for(size_t i = 0; i < rotations.size(); i++) {
 		std::cout << "--------- Rotation # " << i + 1 << " of " << rotations.size() << std::endl;
 		rotations.at(i).show_team();
