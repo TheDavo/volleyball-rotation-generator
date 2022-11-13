@@ -30,13 +30,8 @@ void MenuDriver::print_overview() {
 	std::cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=- Team Overview =-=-=-=-=-=-=-=-=-=-=-=-=-=- " << std::endl;
 	
 	std::cout << "The volleyball team is currently composed of these players and their preferences: " << std::endl;
-	for(Player player : team.get_team()) {
-		std::cout << player.get_name() << ": ";
-		for (Position pos : player.get_positions()){
-			std::cout << position_as_str(pos) << " ";
-		}
-		std::cout << std::endl;
-	}
+
+	team.show_team();
 }
 
 void MenuDriver::print_rotations_intro(){

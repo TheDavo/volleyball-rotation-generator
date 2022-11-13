@@ -31,7 +31,11 @@ Player Team::get_player(int i) {
 
 void Team::show_team() {
 	for (Player player : team) {
-		std::cout << player.get_name() << std::endl;
+		std::cout << player.get_name() << ": ";
+		for (Position pos : player.get_positions()){
+			std::cout << position_as_str(pos) << " ";
+		}
+		std::cout << std::endl;
 	}
 }
 // Setters
