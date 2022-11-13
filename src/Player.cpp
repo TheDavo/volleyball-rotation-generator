@@ -20,10 +20,6 @@ std::vector<Position> Player::get_positions() {
     return positions;
 }
 
-void Player::show_positions() {
-	// TODO
-}
-
 // Setters
 void Player::set_name(std::string name) {
     full_name = name;
