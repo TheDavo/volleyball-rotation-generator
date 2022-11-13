@@ -30,7 +30,12 @@ The tool currently goes through all the permutations of player positions, and cy
 
 If the current selection of players fits the team, that team is added to a vector of Teams which can then later be printed.
 
+A Menu Driver has been written that allows the user to get an overview of the team, and cycle through all of the possible rotations.
 ## Future Goals
-[] Expand on the Player class to add weighting to preferences, such that two Players with the same preferences will now have weights to their preferences, nudging them to their most preferred role.
+[x] Expand on the Player class to add weighting to preferences, such that two Players with the same preferences will now have weights to their preferences, nudging them to their most preferred role.
+--- This goal is not necessary anymore unless a "strongest available team" option needs to be created
 
 [] Add multiple styles to display a team such as a displaying in a simple list or showing the rotation as if it was on the court.
+
+[] Add team editing options within the menu driver, such as addition or removal of players
+--- This requires moving the business logic into the MenuDriver or the VolleyballTeam files as right now the teams are generated within main.cpp. To generate rotations with any team modifications, that ability needs to be pushed into a reusable function.
