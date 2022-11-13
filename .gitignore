@@ -2,6 +2,11 @@
 
 *.out
 
+# Ignore VIM's temporary and swap files
+
+*~
+*.swp
+*.swo
 
 # CodeLite Editor Ignore
 #
