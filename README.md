@@ -28,23 +28,26 @@ This project uses a MenuDriver which is built on a state machine design to handl
 
 ```mermaid
 stateDiagram-v2
-  [*] --> Intro
-  Intro --> Overview : o, overview
-  Intro --> ShowTeams : s, show
-  Intro --> Quit
-  Intro --> ManageTeam : e, edit
-  ShowTeams --> Quit
-  ShowTeams --> Intro
-  Overview --> Quit
-  Overview --> Intro : i, intro
+  [*] --> MainMenu
+  MainMenu --> MainMenu : i, print menu
+  MainMenu --> MainMenu : o, overview of team
+  MainMenu --> Quit : q
+  MainMenu --> ShowRotations : s
+  MainMenu --> ManageTeam : e
+
+  state ShowRotations {
+    [*] --> ShowAll
+    [*] --> ShowNext
+    [*] --> ShowPrev
+  }
+
+  state ManageTeam {
+    [*] --> AddRemovePlayers
+    [*] --> EditPlayers
+  }
+
+  ShowRotations --> Quit
   ManageTeam --> Quit
-  ManageTeam --> NewTeam : n, newteam
-  ManageTeam --> EditTeam : e, edit
-  ManageTeam --> ChangeRotation : c, change rotation
-  NewTeam --> EditTeam
-  EditTeam --> BuildRotations : s, save team
-  ChangeRotation --> BuildRotations
-  BuildRotations --> ManageTeam
 
   Quit --> [*]
 ```
