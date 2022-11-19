@@ -18,3 +18,7 @@ Debug
 *.ctagsd
 *.codelite
 *.project
+
+# VS Code Ignores
+
+.vscode/
