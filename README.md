@@ -24,6 +24,8 @@ The tool aims to aid in showing all the legitimate rotations available based on 
 
 ## State Machine Design
 
+This project uses a MenuDriver which is built on a state machine design to handle the available actions and paths that the user is allowed to use in the app. By using states, each higher level state can be written cleanly and with better focus.
+
 ```mermaid
 stateDiagram-v2
   [*] --> Intro
