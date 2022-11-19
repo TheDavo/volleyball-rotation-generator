@@ -8,15 +8,13 @@
 class MenuDriver {
 	private:
 		enum class State {
-			Intro,
-			Overview,
+			MainMenu,
 			ShowRotations,
 			Exit,
 		};
 
 		std::map<State, std::vector<char>> valid_inputs {
-			{State::Intro, {'i', 'o', 's', 'q'}},
-			{State::Overview, {'i', 'o', 's', 'q'}},
+			{State::MainMenu, {'i', 'o', 's', 'q'}},
 			{State::ShowRotations, {'i', 'o', 'a', 's', 'n', 'N', 'q'}},
 			{State::Exit, {'q'}},
 		};
@@ -24,7 +22,7 @@ class MenuDriver {
 		Team team;
 		std::vector<Team> rotations;
 		std::map<int, Position> team_style;
-		State cur_state {State::Intro};
+		State cur_state {State::MainMenu};
 
 		size_t pagination_size {3};
 		size_t start_rotation_display {0};
@@ -42,8 +40,7 @@ class MenuDriver {
 		// Input functions
 		bool is_valid_input(char input);
 		void handle_input();
-		void handle_input_Intro(char input);
-		void handle_input_Overview(char input);
+		void handle_input_MainMenu(char input);
 		void handle_input_ShowRotations(char input);
 		void handle_input_Exit(char input);
 		void perform_input_action(char input);

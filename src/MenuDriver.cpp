@@ -1,6 +1,6 @@
 #include <vector>
 #include <algorithm>
-
+#include <stdlib.h>
 #include "../include/MenuDriver.h"
 #include "../include/VolleyballTeam.h"
 #include "../include/Player.h"
@@ -14,19 +14,21 @@ MenuDriver::MenuDriver(Team team, std::vector<Team> rotations, std::map<int, Pos
 }
 
 void MenuDriver::run() {
-	cur_state = State::Intro;
+	cur_state = State::MainMenu;
 	print_intro();
 	print_menu();
 	handle_input();
 }
 
 void MenuDriver::print_intro() {
+	system("cls");
 	std::cout << "=-=-=-=-=-=-=- Welcome to the Volleyball Rotation Viewer! =-=-=-=-=-=-=- " << std::endl;
 	std::cout << "|\tThis tool demonstrates what kind of rotations are available with" << std::endl;
 	std::cout << "|\ta volleyball team and its wanted team composition!" << std::endl;
 }
 
 void MenuDriver::print_overview() {
+	system("cls");
 	std::cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=- Team Overview =-=-=-=-=-=-=-=-=-=-=-=-=-=- " << std::endl;
 
 	std::cout << "The volleyball team is currently composed of these players and their preferences: " << std::endl;
@@ -35,7 +37,7 @@ void MenuDriver::print_overview() {
 }
 
 void MenuDriver::print_rotations_intro() {
-
+	system("cls");
 	std::cout << "=-=-=-=-=-=-=-=-=-=-=-=-=- Team Rotations =-=-=-=-=-=-=-=-=-=-=-=-=- " << std::endl;
 	std::cout << "|\tThe team provided is capable of running " << rotations.size() << " rotations" << std::endl;
 	std::cout << "|\twith the team composition of:" << std::endl;
@@ -51,11 +53,8 @@ bool MenuDriver::is_valid_input(char input) {
 
 void MenuDriver::perform_input_action(char input) {
 	switch (cur_state) {
-		case State::Intro:
-			handle_input_Intro(input);
-			break;
-		case State::Overview:
-			handle_input_Overview(input);
+		case State::MainMenu:
+			handle_input_MainMenu(input);
 			break;
 		case State::ShowRotations:
 			handle_input_ShowRotations(input);
@@ -68,13 +67,12 @@ void MenuDriver::perform_input_action(char input) {
 	}
 }
 
-void MenuDriver::handle_input_Intro(char input) {
+void MenuDriver::handle_input_MainMenu(char input) {
 	switch (input) {
 		case 'i':
 			print_intro();
 			break;
 		case 'o':
-			cur_state = State::Overview;
 			print_overview();
 			break;
 		case 's':
@@ -93,11 +91,11 @@ void MenuDriver::handle_input_Intro(char input) {
 void MenuDriver::handle_input_ShowRotations(char input) {
 	switch (input) {
 		case 'i':
-			cur_state = State::Intro;
+			cur_state = State::MainMenu;
 			print_intro();
 			break;
 		case 'o':
-			cur_state = State::Overview;
+			cur_state = State::MainMenu;
 			print_overview();
 			break;
 		case 'a':
@@ -129,10 +127,6 @@ void MenuDriver::change_pagination_size() {
 	} else if (pagination_size <= 0 ) {
 		pagination_size = 1;
 	}
-}
-
-void MenuDriver::handle_input_Overview(char input) {
-	handle_input_Intro(input);
 }
 
 void MenuDriver::handle_input_Exit(char input) {
@@ -183,6 +177,7 @@ void MenuDriver::print_rotations(bool direction) {
 	if (to >= rotations.size()) {
 		to = rotations.size();
 	}
+	system("cls");
 	for(size_t i = start_rotation_display; i < to; i++) {
 		std::cout << "--------- Rotation # " << i + 1 << " of " << rotations.size() << std::endl;
 		rotations.at(i).show_team();
@@ -203,8 +198,7 @@ void MenuDriver::print_all_rotations() {
 void MenuDriver::print_menu() {
 	// TODO
 	switch (cur_state) {
-		case State::Intro:
-		case State::Overview:
+		case State::MainMenu:
 			std:: cout << "\n\n>>| i: intro, o: overview, s: showteams, q: exit" << std::endl;
 			break;
 		case State::ShowRotations:
